@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meetei Mayek Word Corrector</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        textarea {
+            width: 95%;
+            height: 200px;
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            resize: vertical;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Meetei Mayek Word Corrector</h1>
+        <p>Paste your Meetei Mayek text below. The tool will automatically correct repetitive incorrect words and provide a new term.</p>
+        
+        <textarea id="inputText" placeholder="Paste your text here..."></textarea>
+        
+        <button onclick="correctText()">Correct Text</button>
+        
+        <textarea id="outputText" placeholder="Corrected text will appear here..." readonly></textarea>
+        
+        <button onclick="copyText()">Copy Corrected Text</button>
+    </div>
+
+    <script>
+        // Placeholder for the JavaScript logic.
+        // This is where you would handle the replacement.
+        // For a simple static page on GitHub Pages, this logic would be in the browser.
+        // For a more robust solution, this would call a backend service.
+
+        const incorrectToCorrectMap = {
+            'ꯃꯩꯇꯩ': 'ꯃꯤꯇꯩ',
+            'ꯍꯥꯏ': 'ꯍꯥꯏꯕ',
+            'ꯆꯠ': 'ꯆꯠꯄ',
+            // ... Add your dictionary here. For 50,000 words, this would be a large object.
+        };
+
+        function correctText() {
+            const inputText = document.getElementById('inputText').value;
+            let outputText = inputText;
+
+            // Simple loop to replace words based on the map.
+            // For a 50,000 word dictionary, this might be slow in the browser.
+            // A more efficient approach would be to split the text and rebuild it.
+            for (const incorrect in incorrectToCorrectMap) {
+                const correct = incorrectToCorrectMap[incorrect];
+                outputText = outputText.replaceAll(incorrect, correct);
+            }
+            
+            document.getElementById('outputText').value = outputText;
+        }
+        
+        function copyText() {
+            const outputTextarea = document.getElementById('outputText');
+            outputTextarea.select();
+            document.execCommand('copy');
+            alert('Text copied to clipboard!');
+        }
+    </script>
+</body>
+</html>
